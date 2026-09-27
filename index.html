@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DMN City Apartments • Management Portal</title>
+  <title>DMN City Apartments • Management Portal & Reservation System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Ambient Gold Glow -->
-  <div class="glow-bg"></div>
+  <!-- Ambient Gold Glow Background -->
+  <div class="ambient-glow"></div>
 
-  <!-- VIEW 1: EXACT CANVAS LANDING PAGE -->
-  <section id="canvasView" class="canvas-screen active">
-    <div class="portal-card">
-      
+  <!-- ========================================================= -->
+  <!-- 1. LANDING VIEW: EXACT DMN CITY APARTMENTS CANVAS         -->
+  <!-- ========================================================= -->
+  <section id="viewLanding" class="view-screen active">
+    <div class="canvas-card">
       <!-- Stylized Building Logo Emblem -->
       <div class="logo-wrapper">
         <div class="logo-emblem">
@@ -38,142 +39,421 @@
         </div>
       </div>
 
-      <!-- Canvas Brand Headings -->
-      <h1 class="portal-title">DMN CITY APARTMENTS</h1>
-      <p class="portal-subtitle">Luxury Self-Catering Apartments • Management Portal</p>
+      <h1 class="canvas-title">DMN CITY APARTMENTS</h1>
+      <p class="canvas-subtitle">Luxury Self-Catering Apartments • Management Portal</p>
 
-      <!-- Primary Action Button (Direct Entry - No Password Required) -->
-      <div class="action-section">
-        <button type="button" id="btnEnterPortal" class="canvas-btn">
+      <!-- Canvas Primary Entry Button (Direct Access) -->
+      <div class="canvas-action">
+        <button type="button" id="btnEnterApp" class="canvas-btn">
           <span class="btn-arrow">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </span>
-          <span class="btn-text">Enter Management Portal</span>
+          <span class="btn-text">Open Management Portal</span>
         </button>
       </div>
 
-      <!-- Sync Status -->
-      <div class="sync-status">
-        <span class="status-indicator"></span>
-        <span id="canvasSyncText">Google Sheets Connected • 2026 Reporting</span>
+      <div class="canvas-footer">
+        <span class="status-dot"></span>
+        <span>Google Sheets Database Active • 2026 Reporting Year</span>
       </div>
-
     </div>
   </section>
 
-  <!-- VIEW 2: MANAGEMENT & RESERVATION DASHBOARD -->
-  <section id="dashboardView" class="dashboard-screen">
-    <!-- Top Navigation Bar -->
-    <header class="dashboard-header">
-      <div class="nav-brand">
-        <span class="nav-badge">🏢 DMN CITY</span>
-        <div>
-          <h2>DMN City Apartments</h2>
-          <p>Active Reservation System & Inventory</p>
+  <!-- ========================================================= -->
+  <!-- 2. MAIN APPLICATION: FULL PORTAL MENUS & WORKSPACE         -->
+  <!-- ========================================================= -->
+  <div id="viewApp" class="view-screen app-layout">
+    
+    <!-- Left Navigation Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-badge">DMN CITY</div>
+        <div class="brand-text">
+          <h3>APARTMENTS</h3>
+          <p>Management Hub 2026</p>
         </div>
       </div>
-      <div class="nav-actions">
-        <div class="live-status">
-          <span class="status-indicator"></span>
-          <span id="dashboardApiStatus">Live Sync</span>
-        </div>
-        <button type="button" id="btnReturnCanvas" class="btn-nav-outline">Back to Landing</button>
+
+      <!-- Navigation Menus -->
+      <nav class="sidebar-menu">
+        <button type="button" class="nav-item active" data-tab="tabDashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+          <span>Dashboard</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="tabBookings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+          <span>New Booking Form</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="tabCalendar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span>Schedule & Occupancy</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="tabReports">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <span>Financial Reports</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="tabSetup">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <span>Staff & Setup</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button type="button" id="btnBackToLanding" class="btn-return">
+          <span>← Canvas Landing Screen</span>
+        </button>
       </div>
-    </header>
+    </aside>
 
-    <!-- Main Content Container -->
-    <main class="dashboard-content">
-      <!-- Search & Date Control Panel -->
-      <div class="control-panel">
-        <form id="filterForm" class="filter-grid">
-          <div class="filter-group">
-            <label for="checkinDate">Check-In Date</label>
-            <input type="date" id="checkinDate" required />
-          </div>
-          <div class="filter-group">
-            <label for="checkoutDate">Check-Out Date</label>
-            <input type="date" id="checkoutDate" required />
-          </div>
-          <div class="filter-group">
-            <label for="categoryFilter">Apartment Category</label>
-            <select id="categoryFilter">
-              <option value="ALL">All Categories</option>
-            </select>
-          </div>
-          <button type="submit" class="btn-gold" id="btnApplyFilter">
-            <span>Refresh Availability</span>
-          </button>
-        </form>
-      </div>
-
-      <!-- Rooms Grid Header -->
-      <div class="grid-header">
-        <h3 id="inventoryTitle">Apartment Inventory & Status</h3>
-        <span id="inventoryBadge" class="inventory-badge">Loading inventory...</span>
-      </div>
-
-      <!-- Rooms Cards Grid -->
-      <div id="roomsGrid" class="rooms-grid"></div>
-    </main>
-  </section>
-
-  <!-- RESERVATION MODAL DIALOGUE -->
-  <div class="modal-backdrop" id="bookingModal">
-    <div class="modal-dialogue">
-      <div class="modal-top">
-        <div>
-          <h3 id="modalRoomNumber">Unit CJ1210</h3>
-          <p id="modalCategory" class="modal-sub">Luxury Self-Catering</p>
+    <!-- Main Dynamic Workspace -->
+    <div class="workspace">
+      <!-- Top Action Bar -->
+      <header class="top-bar">
+        <div class="bar-title">
+          <h2 id="pageTitle">Executive Overview</h2>
+          <span class="bar-tag">DMN Hotel Res System 2026</span>
         </div>
-        <button type="button" class="modal-close" id="btnCloseModal">&times;</button>
-      </div>
-
-      <form id="newReservationForm" class="modal-body">
-        <div class="field-row">
-          <div class="field-item">
-            <label for="custName">Guest Full Name *</label>
-            <input type="text" id="custName" placeholder="e.g. Johannes Shipanga" required />
+        <div class="bar-actions">
+          <div class="sync-indicator">
+            <span class="pulse-dot"></span>
+            <span id="syncStatusLabel">Connected to Google Sheets</span>
           </div>
-          <div class="field-item">
-            <label for="custPhone">Phone / WhatsApp *</label>
-            <input type="tel" id="custPhone" placeholder="+264 81 000 0000" required />
-          </div>
+          <button type="button" id="btnRefreshData" class="btn-action">↻ Sync Now</button>
         </div>
+      </header>
 
-        <div class="field-row">
-          <div class="field-item">
-            <label for="custEmail">Email Address</label>
-            <input type="email" id="custEmail" placeholder="guest@example.com" />
-          </div>
-          <div class="field-item">
-            <label for="bookingChannel">Channel</label>
-            <input type="text" id="bookingChannel" value="Netlify Portal" readonly />
-          </div>
-        </div>
+      <!-- Content Views -->
+      <main class="page-content">
 
-        <div class="summary-card">
-          <div class="summary-row">
-            <span>Allocated Room:</span>
-            <strong id="summaryUnit">—</strong>
+        <!-- ============================================ -->
+        <!-- TAB 1: EXECUTIVE DASHBOARD                   -->
+        <!-- ============================================ -->
+        <section id="tabDashboard" class="menu-tab active">
+          <!-- KPI Metrics Row -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-title">Monthly Revenue</span>
+              <div class="kpi-value" id="kpiRevenue">NAD 48,250</div>
+              <span class="kpi-sub positive">↑ Direct + OTAs</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">Active Reservations</span>
+              <div class="kpi-value" id="kpiActiveBookings">18</div>
+              <span class="kpi-sub">Booking | Deposit</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">Current Occupancy</span>
+              <div class="kpi-value" id="kpiOccupancy">78%</div>
+              <span class="kpi-sub positive">Optimal Performance</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">Managed Units</span>
+              <div class="kpi-value" id="kpiTotalRooms">12 Units</div>
+              <span class="kpi-sub">Setup | Room List</span>
+            </div>
           </div>
-          <div class="summary-row">
-            <span>Duration:</span>
-            <span id="summaryDates">—</span>
-          </div>
-          <div class="summary-row price-highlight">
-            <span>Total Calculated Rate:</span>
-            <strong id="summaryRate">NAD 0.00</strong>
-          </div>
-        </div>
 
-        <div class="modal-actions">
-          <button type="button" class="btn-cancel" id="btnCancelModal">Cancel</button>
-          <button type="submit" class="btn-gold" id="btnSubmitReservation">Confirm & Write to Sheets</button>
-        </div>
-      </form>
+          <!-- Recent Reservations List -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Live Bookings Queue (`Booking | Deposit`)</h3>
+              <button type="button" class="btn-link" onclick="switchTab('tabBookings')">+ Add New Booking</button>
+            </div>
+            <div class="table-container">
+              <table class="data-table" id="bookingsTable">
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Guest Name</th>
+                    <th>Room #</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Channel</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="bookingsTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- TAB 2: BOOKING & RESERVATION FORM            -->
+        <!-- ============================================ -->
+        <section id="tabBookings" class="menu-tab">
+          <div class="panel form-panel">
+            <div class="panel-header">
+              <h3>New Guest Reservation Entry</h3>
+              <p class="panel-desc">Appends directly into Column M to AA of `Booking | Deposit` tab.</p>
+            </div>
+            
+            <form id="formNewBooking" class="grid-form">
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="formGuestName">Guest Full Name *</label>
+                  <input type="text" id="formGuestName" placeholder="e.g. Taimi N. Shipanga" required />
+                </div>
+                <div class="form-field">
+                  <label for="formPhone">Contact Number *</label>
+                  <input type="tel" id="formPhone" placeholder="+264 81 234 5678" required />
+                </div>
+                <div class="form-field">
+                  <label for="formEmail">Email Address</label>
+                  <input type="email" id="formEmail" placeholder="guest@example.com" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="formRoom">Select Apartment Room *</label>
+                  <select id="formRoom" required>
+                    <option value="CJ1210">Room CJ1210 (Standard 1-Bedroom)</option>
+                    <option value="MKY04">Room MKY04 (Deluxe Suite)</option>
+                    <option value="SU002">Room SU002 (Executive Apartment)</option>
+                    <option value="POL KOP">Room POL KOP (Standard Studio)</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="formCheckin">Check-in Date *</label>
+                  <input type="date" id="formCheckin" required />
+                </div>
+                <div class="form-field">
+                  <label for="formCheckout">Check-out Date *</label>
+                  <input type="date" id="formCheckout" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="formChannel">Booking Channel</label>
+                  <select id="formChannel">
+                    <option value="Direct / Netlify">Direct Netlify Portal</option>
+                    <option value="Airbnb (ABNB)">Airbnb (ABNB)</option>
+                    <option value="Booking.com">Booking.com</option>
+                    <option value="Walk-in">Walk-in / Phone</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="formPaymentMethod">Payment Method</label>
+                  <select id="formPaymentMethod">
+                    <option value="EFT / Bank Transfer">EFT / Bank Transfer</option>
+                    <option value="Credit Card POS">Credit Card POS</option>
+                    <option value="Cash Deposit">Cash Deposit</option>
+                    <option value="Online Webhook">Online Portal</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="formDepositBy">Staff Received By</label>
+                  <select id="formDepositBy">
+                    <option value="Frieda">Frieda (EMP001)</option>
+                    <option value="Jenny">Jenny (EMP002)</option>
+                    <option value="Josh">Josh (EMP003)</option>
+                    <option value="Bernard">Bernard (EMP004)</option>
+                    <option value="Anton">Anton (EMP005)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="formTotalAmount">Total Payment (NAD)</label>
+                  <input type="number" id="formTotalAmount" placeholder="2550" required />
+                </div>
+                <div class="form-field">
+                  <label for="formPaidStatus">Payment Status</label>
+                  <select id="formPaidStatus">
+                    <option value="Paid">Paid in Full</option>
+                    <option value="Deposit Received">Deposit Received</option>
+                    <option value="Pending">Payment Pending</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="reset" class="btn-secondary">Clear Form</button>
+                <button type="submit" class="btn-gold" id="btnSubmitBookingForm">Submit & Append to Google Sheet</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- TAB 3: SCHEDULE & OCCUPANCY MATRIX           -->
+        <!-- ============================================ -->
+        <section id="tabCalendar" class="menu-tab">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>Availability & Occupancy Matrix</h3>
+                <p class="panel-desc">Synchronized with `Availability by Room` and `Printable Schedule`.</p>
+              </div>
+              <div class="legend">
+                <span class="legend-item"><span class="badge-dot occupied"></span> Occupied / Booked</span>
+                <span class="legend-item"><span class="badge-dot available"></span> Available</span>
+              </div>
+            </div>
+
+            <div class="schedule-grid" id="scheduleMatrix">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- TAB 4: FINANCIAL & CHANNEL REPORTS           -->
+        <!-- ============================================ -->
+        <section id="tabReports" class="menu-tab">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-title">Airbnb (ABNB) Channel</span>
+              <div class="kpi-value">NAD 28,400</div>
+              <span class="kpi-sub">Commission: 15.5% (Bk-935877)</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">Direct Portal Revenue</span>
+              <div class="kpi-value">NAD 16,850</div>
+              <span class="kpi-sub positive">0% Commission</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">OTA / Booking.com</span>
+              <div class="kpi-value">NAD 3,000</div>
+              <span class="kpi-sub">Standard Rate Plan</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Channel Revenue Breakdown (`OTAS Rates` & `Booking | Deposit`)</h3>
+            </div>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Channel Code</th>
+                    <th>Source Name</th>
+                    <th>Average Nightly Rate</th>
+                    <th>Commission Split</th>
+                    <th>Total Nights Booked</th>
+                    <th>Gross Revenue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>ABNB</strong></td>
+                    <td>Airbnb Online</td>
+                    <td>NAD 950.00</td>
+                    <td>15.5%</td>
+                    <td>32 Nights</td>
+                    <td>NAD 28,400.00</td>
+                  </tr>
+                  <tr>
+                    <td><strong>DIR</strong></td>
+                    <td>Direct Netlify Portal</td>
+                    <td>NAD 850.00</td>
+                    <td>0.0%</td>
+                    <td>20 Nights</td>
+                    <td>NAD 16,850.00</td>
+                  </tr>
+                  <tr>
+                    <td><strong>OTA</strong></td>
+                    <td>Online Travel Agents</td>
+                    <td>NAD 1,000.00</td>
+                    <td>18.0%</td>
+                    <td>3 Nights</td>
+                    <td>NAD 3,000.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- TAB 5: STAFF PROFILES & SETUP                -->
+        <!-- ============================================ -->
+        <section id="tabSetup" class="menu-tab">
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Active Staff Profiles (`Setup | Staff Profiles`)</h3>
+              <span class="badge">5 Employees Active</span>
+            </div>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Employee ID</th>
+                    <th>Full Name</th>
+                    <th>Contact Number</th>
+                    <th>Shift / Working Hours</th>
+                    <th>Permissions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>EMP001</strong></td>
+                    <td>Frieda</td>
+                    <td>+264 81 123 0001</td>
+                    <td>Day Shift (08:00 - 17:00)</td>
+                    <td>Front Desk / Reservations</td>
+                  </tr>
+                  <tr>
+                    <td><strong>EMP002</strong></td>
+                    <td>Jenny</td>
+                    <td>+264 81 123 0002</td>
+                    <td>Day Shift (08:00 - 17:00)</td>
+                    <td>Guest Intake & Billing</td>
+                  </tr>
+                  <tr>
+                    <td><strong>EMP003</strong></td>
+                    <td>Josh</td>
+                    <td>+264 81 123 0003</td>
+                    <td>Afternoon (14:00 - 22:00)</td>
+                    <td>Check-ins & Keys</td>
+                  </tr>
+                  <tr>
+                    <td><strong>EMP004</strong></td>
+                    <td>Bernard</td>
+                    <td>+264 81 123 0004</td>
+                    <td>Night Audit (22:00 - 06:00)</td>
+                    <td>Night Security & Dispatch</td>
+                  </tr>
+                  <tr>
+                    <td><strong>EMP005</strong></td>
+                    <td>Anton</td>
+                    <td>+264 81 123 0005</td>
+                    <td>General / Maintenance</td>
+                    <td>Operations & Maintenance</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel" style="margin-top: 1.5rem;">
+            <div class="panel-header">
+              <h3>Company Metadata (`Setup | Company Info`)</h3>
+            </div>
+            <div class="company-info-grid">
+              <div><strong>Company Name:</strong> DMN INVESTMENTS CC</div>
+              <div><strong>Trading As:</strong> DMN CITY APARTMENTS</div>
+              <div><strong>Reporting Year:</strong> 2026 Fiscal Year</div>
+              <div><strong>System Version:</strong> v2.4.1 Production</div>
+            </div>
+          </div>
+        </section>
+
+      </main>
     </div>
   </div>
 
