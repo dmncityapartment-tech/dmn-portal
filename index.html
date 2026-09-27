@@ -3,134 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DMN City Apartments — Guest Reservation & Portal</title>
+  <title>DMN City Apartments • Management Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Header / Navigation -->
-  <header class="navbar">
-    <div class="nav-container">
-      <div class="brand">
-        <span class="brand-badge">🏢 DMN CITY</span>
-        <div class="brand-text">
-          <h1>DMN CITY APARTMENTS</h1>
-          <p>Luxury Self-Catering Apartments • Portal</p>
+  <!-- Ambient Background Glow -->
+  <div class="glow-bg"></div>
+
+  <!-- Centered Canvas Container -->
+  <main class="canvas-container">
+    <div class="portal-card">
+      
+      <!-- Stylized Building Logo Emblem -->
+      <div class="logo-wrapper">
+        <div class="logo-emblem">
+          <svg class="building-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 40V18L24 10L34 18V40H14Z" stroke="url(#goldGradient)" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M8 40V24L14 19" stroke="url(#goldGradient)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M40 40V24L34 19" stroke="url(#goldGradient)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 22H28M20 28H28M20 34H28" stroke="url(#goldGradient)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 40H44" stroke="url(#goldGradient)" stroke-width="2.5" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="goldGradient" x1="4" y1="10" x2="44" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FCD34D"/>
+                <stop offset="0.5" stop-color="#F59E0B"/>
+                <stop offset="1" stop-color="#D97706"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="emblem-tag">DMN CITY</span>
         </div>
       </div>
-      <div class="connection-status" id="apiStatus">
-        <span class="status-dot"></span> <span id="statusLabel">Checking Connection...</span>
+
+      <!-- Canvas Brand Headings -->
+      <h1 class="portal-title">DMN CITY APARTMENTS</h1>
+      <p class="portal-subtitle">Luxury Self-Catering Apartments • Management Portal</p>
+
+      <!-- Canvas Primary Action Button -->
+      <div class="action-section">
+        <button id="btnLoginDialog" class="canvas-btn">
+          <span class="btn-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
+          <span class="btn-text">Login Dialogue Box</span>
+        </button>
       </div>
+
+      <!-- Live Sync Indicator -->
+      <div class="sync-status">
+        <span class="status-indicator"></span>
+        <span>Google Sheets Sync Active • 2026 Reporting</span>
+      </div>
+
     </div>
-  </header>
-
-  <!-- Hero & Search Section -->
-  <main class="main-content">
-    <section class="hero-section">
-      <div class="hero-card">
-        <h2>Real-Time Room Booking & Availability</h2>
-        <p class="subtitle">Search live availability and book directly into the management system.</p>
-
-        <!-- Availability Search Bar -->
-        <form id="searchForm" class="search-bar">
-          <div class="input-group">
-            <label for="checkinDate">Check-in</label>
-            <input type="date" id="checkinDate" required />
-          </div>
-          <div class="input-group">
-            <label for="checkoutDate">Check-out</label>
-            <input type="date" id="checkoutDate" required />
-          </div>
-          <div class="input-group">
-            <label for="roomCategoryFilter">Apartment Type</label>
-            <select id="roomCategoryFilter">
-              <option value="ALL">All Categories</option>
-            </select>
-          </div>
-          <button type="submit" class="btn-primary" id="btnSearch">
-            <span>Check Availability</span>
-          </button>
-        </form>
-      </div>
-    </section>
-
-    <!-- Rooms / Results Grid -->
-    <section class="results-section">
-      <div class="section-header">
-        <h3 id="resultsHeading">Available Apartments</h3>
-        <span id="resultsCount" class="results-badge">Select dates to view</span>
-      </div>
-      <div id="roomsGrid" class="rooms-grid">
-        <!-- Room cards populated dynamically via app.js -->
-        <div class="empty-state">
-          <p>Select your arrival and departure dates above to fetch live room inventory.</p>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <!-- Booking Modal Dialogue -->
-  <div class="modal-backdrop" id="bookingModal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <div>
-          <h3 id="modalRoomTitle">Reserve Apartment</h3>
-          <p id="modalRoomCategory" class="modal-subtitle">Luxury Unit</p>
+  <!-- Login Dialogue Box (Modal Popup) -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="dialogue-box">
+      <div class="dialogue-header">
+        <div class="dialogue-title-group">
+          <h3>Portal Authentication</h3>
+          <p>DMN City Apartments Management Hub</p>
         </div>
-        <button class="modal-close" id="btnModalClose">&times;</button>
+        <button class="dialogue-close" id="btnCloseModal">&times;</button>
       </div>
 
-      <form id="bookingForm" class="modal-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="customerName">Full Name *</label>
-            <input type="text" id="customerName" placeholder="e.g. Johannes Shipanga" required />
-          </div>
-          <div class="form-group">
-            <label for="guestEmail">Email Address *</label>
-            <input type="email" id="guestEmail" placeholder="guest@example.com" required />
-          </div>
+      <form id="authForm" class="dialogue-body">
+        <div class="form-field">
+          <label for="staffId">Staff ID / Username</label>
+          <input type="text" id="staffId" placeholder="e.g. DMN-ADM01" required autocomplete="username" />
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="guestPhone">Phone / WhatsApp *</label>
-            <input type="tel" id="guestPhone" placeholder="+264 81 000 0000" required />
-          </div>
-          <div class="form-group">
-            <label for="channel">Booking Source</label>
-            <input type="text" id="channel" value="Netlify Portal" readonly />
-          </div>
+        <div class="form-field">
+          <label for="accessPin">Access PIN / Password</label>
+          <input type="password" id="accessPin" placeholder="••••••••" required autocomplete="current-password" />
         </div>
 
-        <div class="booking-summary-box">
-          <div class="summary-line">
-            <span>Unit Allocated:</span>
-            <strong id="summaryRoomNumber">—</strong>
-          </div>
-          <div class="summary-line">
-            <span>Duration:</span>
-            <span id="summaryDates">—</span>
-          </div>
-          <div class="summary-line total-price">
-            <span>Total Payment:</span>
-            <strong id="summaryPrice">NAD 0.00</strong>
-          </div>
+        <div class="dialogue-options">
+          <label class="remember-label">
+            <input type="checkbox" id="rememberMe" checked />
+            <span>Stay connected</span>
+          </label>
+          <a href="#" class="forgot-link">Assistance?</a>
         </div>
 
-        <div class="modal-actions">
-          <button type="button" class="btn-secondary" id="btnCancelBooking">Cancel</button>
-          <button type="submit" class="btn-primary" id="btnSubmitBooking">Confirm & Submit Reservation</button>
-        </div>
+        <button type="submit" class="submit-auth-btn" id="btnSubmitAuth">
+          <span>Authorize Access</span>
+          <svg viewBox="0 0 20 20" fill="currentColor" class="submit-arrow">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
       </form>
     </div>
   </div>
-
-  <footer class="footer">
-    <p>&copy; 2026 DMN City Apartments CC. Synchronized with Google Sheets Management Hub.</p>
-  </footer>
 
   <script src="app.js"></script>
 </body>
