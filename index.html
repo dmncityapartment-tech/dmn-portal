@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DMN City Apartments — Guest Reservation & Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <span class="brand-badge">🏢 DMN CITY</span>
+        <div class="brand-text">
+          <h1>DMN CITY APARTMENTS</h1>
+          <p>Luxury Self-Catering Apartments • Portal</p>
+        </div>
+      </div>
+      <div class="connection-status" id="apiStatus">
+        <span class="status-dot"></span> <span id="statusLabel">Checking Connection...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero & Search Section -->
+  <main class="main-content">
+    <section class="hero-section">
+      <div class="hero-card">
+        <h2>Real-Time Room Booking & Availability</h2>
+        <p class="subtitle">Search live availability and book directly into the management system.</p>
+
+        <!-- Availability Search Bar -->
+        <form id="searchForm" class="search-bar">
+          <div class="input-group">
+            <label for="checkinDate">Check-in</label>
+            <input type="date" id="checkinDate" required />
+          </div>
+          <div class="input-group">
+            <label for="checkoutDate">Check-out</label>
+            <input type="date" id="checkoutDate" required />
+          </div>
+          <div class="input-group">
+            <label for="roomCategoryFilter">Apartment Type</label>
+            <select id="roomCategoryFilter">
+              <option value="ALL">All Categories</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary" id="btnSearch">
+            <span>Check Availability</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Rooms / Results Grid -->
+    <section class="results-section">
+      <div class="section-header">
+        <h3 id="resultsHeading">Available Apartments</h3>
+        <span id="resultsCount" class="results-badge">Select dates to view</span>
+      </div>
+      <div id="roomsGrid" class="rooms-grid">
+        <!-- Room cards populated dynamically via app.js -->
+        <div class="empty-state">
+          <p>Select your arrival and departure dates above to fetch live room inventory.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Booking Modal Dialogue -->
+  <div class="modal-backdrop" id="bookingModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 id="modalRoomTitle">Reserve Apartment</h3>
+          <p id="modalRoomCategory" class="modal-subtitle">Luxury Unit</p>
+        </div>
+        <button class="modal-close" id="btnModalClose">&times;</button>
+      </div>
+
+      <form id="bookingForm" class="modal-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="customerName">Full Name *</label>
+            <input type="text" id="customerName" placeholder="e.g. Johannes Shipanga" required />
+          </div>
+          <div class="form-group">
+            <label for="guestEmail">Email Address *</label>
+            <input type="email" id="guestEmail" placeholder="guest@example.com" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="guestPhone">Phone / WhatsApp *</label>
+            <input type="tel" id="guestPhone" placeholder="+264 81 000 0000" required />
+          </div>
+          <div class="form-group">
+            <label for="channel">Booking Source</label>
+            <input type="text" id="channel" value="Netlify Portal" readonly />
+          </div>
+        </div>
+
+        <div class="booking-summary-box">
+          <div class="summary-line">
+            <span>Unit Allocated:</span>
+            <strong id="summaryRoomNumber">—</strong>
+          </div>
+          <div class="summary-line">
+            <span>Duration:</span>
+            <span id="summaryDates">—</span>
+          </div>
+          <div class="summary-line total-price">
+            <span>Total Payment:</span>
+            <strong id="summaryPrice">NAD 0.00</strong>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="btnCancelBooking">Cancel</button>
+          <button type="submit" class="btn-primary" id="btnSubmitBooking">Confirm & Submit Reservation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 DMN City Apartments CC. Synchronized with Google Sheets Management Hub.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
